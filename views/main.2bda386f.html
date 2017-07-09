@@ -1,0 +1,99 @@
+<div class="jumbotron" ng-controller="feedbackFormCtrl as feedbackFormCtrl">
+    <h3 class="hide">Have a Problem or Request? Help on the way!{{username}}</h3>
+    <p class="lead">
+        <form class="form">
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="form-control-label" for="username">Name:</label>
+                    <input type="text" class="form-control speech-input" id="username" placeholder="{{feedbackFormCtrl.usernamePlaceholder}}" ng-model="username">
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="form-control-label" for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="{{feedbackFormCtrl.emailPlaceholder}}" ng-model="email">
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="form-control-label" for="phone">Phone Number:</label>
+                    <input type="text" class="form-control" id="phone" placeholder="{{feedbackFormCtrl.contactPlaceholder}}" ng-model="phone">
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="form-control-label" for="criticality ">Critical:</label>
+                    <input type="radio" value="Critical" ng-model="criticality">Yes</input>
+                    <input type="radio" value="Non-Critical" ng-model="criticality">No</input>
+                </div>
+                <div class="form-group col-md-4">
+
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="checkbox" ng-model="notify">Notify me when feedback is logged<br>
+                    <input type="checkbox" ng-model="copyMe">Send me a copy of response<br>
+                    <input type="checkbox" ng-model="anonymous">Keep my feedback anonymous
+                </div>
+
+            </div>
+            <div class="row ">
+                <div class="form-group col-md-4 ">
+                    <label class="form-control-label" for="subsection ">Subsection:</label>
+                    <select class="form-control " id="subsection" ng-model="subsection.selected" ng-options="x for x in subsection">
+                   	 </select>
+                </div>
+
+                <div class="form-group col-md-8 " ng-show="criticality">
+                    <label class="form-control-label" for="situation ">Situation:</label>
+                    <select class="form-control " id="situation" ng-model="situation.selected" ng-options="x for x in subsection">
+                   
+			 </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="form-control-label" for="suggestion">Suggestion:</label>
+                    <textarea rows="4" class="form-control" id="suggestion" placeholder="{{feedbackFormCtrl.suggestionPlaceholder}}" ng-model="suggestion" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="form-control-label" for="roadnumber">Road Number:</label>
+                    <input type="search" class="form-control" id="roadnumber" placeholder="{{feedbackFormCtrl.roadNumberPlaceholder}}" ng-model="roadnumber" typeahead-is-open="typeaheadIsOpen" typeahead-template-url="customPopupTemplate.html" typeahead-no-results="noResults"
+                        uib-typeahead="unit for unit in feedbackFormCtrl.getUnits($viewValue)" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="form-control-label" for="fileUpload">Attach a File:</label>
+                    <input type="file" class="form-control" ng-model="fileUpload">
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6  text-center"><button class="btn btn-primary ">Reset!</button></div>
+                <div class="form-group col-md-6  text-center"><button class="btn btn-primary " ng-disabled="feedbackFormCtrl.isDisabledSave()" ng-click="feedbackFormCtrl.createFeedback()">Submit Feedback!</button></div>
+            </div>
+        </form>
+
+    </p>
+
+    <h4 class="hide">{{username}} (whose email is {{email}} and contact number is {{phone}}) submitted a {{criticality}} feedback under subsection: {{subsection}} and situation: {{situation}} with description </h4>
+    <p class="hide">
+        " {{suggestion}} " for road number {{roadnumber}} and want to be notified: {{notify}}, copied : {{copyme}} and kept anonymous : {{anonymous}} </p>
+    <script type="text/ng-template" id="customPopupTemplate.html">
+        <a class="item_match">
+            <span ng-bind-html="match.model.aar | uibTypeaheadHighlight:query"></span><span>-</span>
+            <span ng-bind-html="match.model.unitNumber | uibTypeaheadHighlight:query"></span>
+        </a>
+    </script>
+</div>
+
+<div class="row marketing hide">
+
+
+    <h4>Angular</h4>
+    <p>
+        AngularJS is a toolset for building the framework most suited to your application development.
+    </p>
+
+    <h4>Karma</h4>
+    <p>Spectacular Test Runner for JavaScript.</p>
+</div>
